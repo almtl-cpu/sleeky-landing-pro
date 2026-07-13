@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sleeky Pro — Le logiciel qui fait tourner votre salon</title>
+<meta name="description" content="Agenda, caisse, fidélité, avis, liste d'attente et bien plus. Le logiciel tout-en-un pour les pros de la beauté et du bien-être.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#FBFAF7;--ivory-deep:#F3F0EA;--ink:#0F172A;--ink-soft:#3B4252;
+    --muted:#8A8578;--coral:#FB7185;--coral-deep:#E85D6F;--line:#E7E3DA;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--ivory);color:var(--ink);font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  ::selection{background:var(--coral);color:#fff}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+
+  nav{display:flex;align-items:center;justify-content:space-between;padding:36px 32px;max-width:1080px;margin:0 auto;}
+  .logo{font-weight:700;font-size:25px;letter-spacing:-0.03em;color:var(--ink);text-decoration:none;
+    display:flex;align-items:center;gap:9px;}
+  .logo b{color:var(--coral);font-weight:800}
+  .logo .tag{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+    border:1px solid var(--line);padding:3px 8px;border-radius:6px;}
+  .nav-pro{font-size:14px;color:var(--ink-soft);text-decoration:none;padding:9px 18px;
+    border:1px solid var(--line);border-radius:999px;transition:all .25s ease;font-weight:500;}
+  .nav-pro:hover{border-color:var(--ink);color:var(--ink)}
+
+  .hero{padding:72px 0 80px;opacity:0;transform:translateY(20px);
+    animation:rise .9s cubic-bezier(.2,.7,.2,1) .1s forwards;}
+  .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    font-weight:600;margin-bottom:28px;display:flex;align-items:center;gap:12px;}
+  .eyebrow::before{content:"";width:32px;height:1px;background:var(--coral)}
+  h1{font-weight:800;font-size:clamp(42px,6.4vw,76px);line-height:1.03;letter-spacing:-0.045em;
+    color:var(--ink);max-width:16ch;margin-bottom:32px;}
+  h1 em{font-style:normal;color:var(--coral)}
+  .lead{font-size:clamp(18px,2.2vw,21px);color:var(--ink-soft);max-width:46ch;margin-bottom:44px;}
+
+  .signup{display:flex;gap:12px;max-width:480px;flex-wrap:wrap}
+  .signup input[type=email]{flex:1;min-width:220px;padding:16px 20px;font-size:16px;font-family:inherit;
+    border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);
+    transition:border-color .2s,box-shadow .2s;}
+  .signup input[type=email]:focus{outline:none;border-color:var(--coral);box-shadow:0 0 0 4px rgba(251,113,133,.12);}
+  .signup button{padding:16px 30px;font-size:16px;font-weight:600;font-family:inherit;background:var(--ink);
+    color:#fff;border:none;border-radius:14px;cursor:pointer;transition:transform .2s,background .2s;white-space:nowrap;}
+  .signup button:hover{background:var(--coral-deep);transform:translateY(-2px)}
+  .signup button:active{transform:translateY(0)}
+  .hint{font-size:13px;color:var(--muted);margin-top:16px}
+
+  .form-success{display:none;padding:20px 24px;background:#fff;border:1px solid var(--line);
+    border-left:3px solid var(--coral);border-radius:14px;max-width:480px;font-size:16px;color:var(--ink);}
+  .form-success strong{font-weight:600}
+  .form-success.show{display:block;animation:rise .5s ease forwards}
+
+  .tools{border-top:1px solid var(--line);padding:64px 0 20px;opacity:0;transform:translateY(20px);
+    animation:rise .9s cubic-bezier(.2,.7,.2,1) .35s forwards;}
+  .section-label{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+    font-weight:600;margin-bottom:36px;}
+  .tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .tool{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 28px;transition:border-color .25s}
+  .tool:hover{border-color:var(--coral)}
+  .tool h3{font-weight:700;font-size:19px;letter-spacing:-0.02em;margin-bottom:8px;color:var(--ink);}
+  .tool p{font-size:15px;color:var(--ink-soft)}
+
+  .smart{padding:80px 0 20px;opacity:0;transform:translateY(20px);
+    animation:rise .9s cubic-bezier(.2,.7,.2,1) .1s forwards;}
+  .smart-intro{font-weight:800;font-size:clamp(28px,4.2vw,44px);letter-spacing:-0.04em;line-height:1.08;
+    color:var(--ink);max-width:18ch;margin-bottom:16px;}
+  .smart-intro em{font-style:normal;color:var(--coral)}
+  .smart-sub{font-size:17px;color:var(--ink-soft);max-width:52ch;margin-bottom:48px}
+
+  .smart-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .feat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 24px;
+    transition:transform .25s,box-shadow .25s,border-color .25s;}
+  .feat:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(15,23,42,.06);border-color:var(--coral)}
+  .feat .dot{width:42px;height:42px;border-radius:12px;background:rgba(251,113,133,.10);
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .feat .dot svg{width:22px;height:22px;stroke:var(--coral);stroke-width:2;fill:none;
+    stroke-linecap:round;stroke-linejoin:round;}
+  .feat h4{font-weight:700;font-size:16px;color:var(--ink);margin-bottom:7px;letter-spacing:-0.02em;}
+  .feat p{font-size:14px;color:var(--ink-soft);line-height:1.55}
+
+  .value{margin-top:80px;padding:52px 48px;background:var(--ink);border-radius:24px;color:#fff;
+    display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+  .value-text{max-width:52ch}
+  .value-text h3{font-weight:800;font-size:clamp(24px,3vw,34px);letter-spacing:-0.04em;line-height:1.12;margin-bottom:14px;}
+  .value-text h3 em{font-style:normal;color:var(--coral)}
+  .value-text p{font-size:16px;color:#C7CAD1;line-height:1.6}
+  .value-cta{padding:15px 30px;background:var(--coral);color:#fff;text-decoration:none;border-radius:14px;
+    font-weight:600;font-size:16px;white-space:nowrap;transition:transform .2s,background .2s;}
+  .value-cta:hover{background:var(--coral-deep);transform:translateY(-2px)}
+
+  .closing{padding:88px 0 60px;text-align:center;opacity:0;transform:translateY(20px);
+    animation:rise .9s cubic-bezier(.2,.7,.2,1) .3s forwards;}
+  .closing p{font-weight:700;font-size:clamp(24px,3.4vw,36px);color:var(--ink);max-width:22ch;
+    margin:0 auto 36px;line-height:1.2;letter-spacing:-0.035em;}
+  .closing a{display:inline-block;padding:15px 34px;background:var(--coral);color:#fff;text-decoration:none;
+    border-radius:14px;font-weight:600;font-size:16px;transition:transform .2s,background .2s;}
+  .closing a:hover{background:var(--coral-deep);transform:translateY(-2px)}
+
+  footer{padding:40px 0 60px;border-top:1px solid var(--line);display:flex;justify-content:space-between;
+    align-items:center;font-size:13px;color:var(--muted);flex-wrap:wrap;gap:16px;}
+  footer a{color:var(--ink-soft);text-decoration:none}
+  footer a:hover{color:var(--coral)}
+  .made{font-weight:600}
+
+  @keyframes rise{to{opacity:1;transform:translateY(0)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;opacity:1!important;transform:none!important}}
+  @media (max-width:860px){.smart-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:720px){nav{padding:24px 20px}.wrap{padding:0 20px}.tools-grid{grid-template-columns:1fr}
+    .smart-grid{grid-template-columns:1fr}.hero{padding:44px 0 56px}.signup button{flex:1}
+    .value{padding:36px 28px;flex-direction:column;align-items:flex-start}.value-cta{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo"><span><b>S</b>leeky</span><span class="tag">Pro</span></a>
+  <a href="https://sleeky.fr" class="nav-pro">Vous voulez réserver ?</a>
+</nav>
+
+<header class="wrap hero">
+  <div class="eyebrow">Ouverture prochaine</div>
+  <h1>Gérez votre salon. <em>Pas votre logiciel.</em></h1>
+  <p class="lead">Agenda, caisse, fidélité, liste d'attente. Tout ce qui fait tourner un salon, réuni dans un seul outil pensé pour les pros de la beauté et du bien-être — et vraiment pensé, pas empilé.</p>
+
+  <form class="signup" id="signupForm">
+    <input type="email" id="email" placeholder="Votre email professionnel" required aria-label="Votre email professionnel">
+    <button type="submit">Demander un accès anticipé</button>
+  </form>
+  <p class="hint">Places limitées pour le lancement. Les premiers inscrits sont contactés en priorité.</p>
+
+  <div class="form-success" id="success">
+    <strong>Demande enregistrée.</strong> On vous recontacte dès l'ouverture des accès anticipés.
+  </div>
+</header>
+
+<section class="tools">
+  <div class="wrap">
+    <p class="section-label">Les fondamentaux, bien faits</p>
+    <div class="tools-grid">
+      <div class="tool">
+        <h3>Agenda &amp; réservation en ligne</h3>
+        <p>Vos clients réservent seuls, à toute heure. Rappels automatiques, gestion des collaborateurs, planning clair.</p>
+      </div>
+      <div class="tool">
+        <h3>Caisse conforme à la loi anti-fraude TVA</h3>
+        <p>Encaissement, tickets, TVA, inaltérabilité et archivage. Conforme à la loi anti-fraude TVA par attestation éditeur — vous vendez, la conformité suit.</p>
+      </div>
+      <div class="tool">
+        <h3>Liste d'attente intelligente</h3>
+        <p>Un créneau se libère, le bon client est prévenu et replacé automatiquement. Fini les trous dans l'agenda.</p>
+      </div>
+      <div class="tool">
+        <h3>Fidélité &amp; avis</h3>
+        <p>Récompensez vos habitués, collectez les avis, faites revenir vos clients sans y penser.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap smart">
+  <p class="smart-intro">Là où les autres <em>s'arrêtent</em>, Sleeky continue.</p>
+  <p class="smart-sub">Des outils qu'on ne trouve nulle part ailleurs, nés de vraies journées en salon. Ils travaillent en arrière-plan pendant que vous êtes derrière le fauteuil.</p>
+
+  <div class="smart-grid">
+    <div class="feat">
+      <div class="dot"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg></div>
+      <h4>Gestion automatique des absences</h4>
+      <p>Un collaborateur absent ? Les rendez-vous concernés sont repérés et réorganisés sans que vous ayez à tout reprendre à la main.</p>
+    </div>
+    <div class="feat">
+      <div class="dot"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg></div>
+      <h4>Algorithme d'attribution</h4>
+      <p>Sleeky place le bon rendez-vous avec le bon collaborateur, au bon moment — selon les compétences, les préférences et l'enchaînement des prestations.</p>
+    </div>
+    <div class="feat">
+      <div class="dot"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v5h-5"/></svg></div>
+      <h4>Rotation de planning</h4>
+      <p>Répartissez la charge équitablement entre vos collaborateurs, automatiquement, sans favoriser toujours les mêmes.</p>
+    </div>
+    <div class="feat">
+      <div class="dot"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <h4>Masquage dynamique des numéros</h4>
+      <p>Les coordonnées de vos clients restent protégées et ne s'affichent que quand c'est légitime. Vos données, sous contrôle.</p>
+    </div>
+    <div class="feat">
+      <div class="dot"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></div>
+      <h4>Tendances &amp; lecture d'activité</h4>
+      <p>Vos heures creuses, vos prestations qui marchent, l'évolution de votre fréquentation. Vous voyez clair, vous décidez juste.</p>
+    </div>
+    <div class="feat">
+      <div class="dot"><svg viewBox="0 0 24 24"><path d="M21 8V6a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 6v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/><path d="M18 15v6M15 18h6"/></svg></div>
+      <h4>Prévision des ruptures de stock</h4>
+      <p>Sleeky anticipe le moment où un produit va manquer et vous prévient avant que l'étagère soit vide.</p>
+    </div>
+  </div>
+
+  <div class="value">
+    <div class="value-text">
+      <h3>Tout ça, pour <em>bien moins cher</em> que ce que vous payez aujourd'hui.</h3>
+      <p>Pas parce qu'on rogne sur la qualité — au contraire. Parce qu'un outil bien conçu coûte moins cher à faire tourner, et qu'on préfère vous le rendre plutôt que le facturer option par option.</p>
+    </div>
+    <a href="#signupForm" class="value-cta" onclick="document.getElementById('email').focus()">Voir Sleeky en avant-première</a>
+  </div>
+</section>
+
+<section class="wrap closing">
+  <p>Moins de temps sur l'écran. Plus de temps derrière le fauteuil.</p>
+  <a href="#signupForm" onclick="document.getElementById('email').focus()">Demander un accès anticipé</a>
+</section>
+
+<footer class="wrap">
+  <span class="made">Made in Aix</span>
+  <span>Sleeky © 2026 · <a href="https://sleeky.fr">Réserver un salon</a></span>
+</footer>
+
+<script>
+  const FORM_ENDPOINT = "https://formspree.io/f/mvzeorkl";
+  const form = document.getElementById('signupForm');
+  const btn = form.querySelector('button');
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const success = document.getElementById('success');
+    const btnLabel = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Envoi…';
+    try{
+      const res = await fetch(FORM_ENDPOINT,{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({email:email, audience:'pro'})
+      });
+      if(res.ok){
+        form.style.display='none';
+        document.querySelector('.hint').style.display='none';
+        success.classList.add('show');
+      }else{
+        btn.disabled=false; btn.textContent=btnLabel;
+        alert('Une erreur est survenue. Merci de réessayer.');
+      }
+    }catch(err){
+      btn.disabled=false; btn.textContent=btnLabel;
+      alert('Connexion impossible. Vérifiez votre réseau et réessayez.');
+    }
+  });
+</script>
+</body>
+</html>
